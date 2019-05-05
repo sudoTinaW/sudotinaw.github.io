@@ -22,6 +22,11 @@ url: "https://www.sudotina.ca" # the base hostname & protocol for your site, e.g
 
 github_username: sudoTinaW
 linkedin_username: tina-wang
+social:
+  name: Tina Wang
+  links:
+    - https://www.linkedin.com/in/tina-wang
+    - https://github.com/sudoTinaW
 
 # Build settings
 markdown: kramdown
