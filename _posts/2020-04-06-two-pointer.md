@@ -5,13 +5,11 @@ title: Two Pointer
 date: '2020-04-06 14:50:00 -0000'
 categories: Two Pointer
 ---
-## Same Directions
-
 - Feature: Left pointer doesn't need to go back, i.e., when right pointer moves to the next position, left pointer doesn't need to start over from the beginning. Instead, it can stay at where it is or move forward.
 
-- Tempalte: Right pointer will iterate through the list, deal with the left pointer depends on right pointer's value and requirements.
+- Tempalte: Right pointer will iterate through the list, calculate the results and decide when and how left pointer will move depending on the right pointer's value.
 
-### LintCode Questions
+## Same Directions
 
 1.Window Sum
 
