@@ -13,6 +13,8 @@ categories: Two Pointer
 
 1.Window Sum
 
+[https://www.lintcode.com/problem/window-sum/description](https://www.lintcode.com/problem/window-sum/description)
+
 Given an array of n integers, and a moving window(size k), move the window at each iteration from the start of the array, find the sum of the element inside the window at each moving.
 
 * left won't move when right < k.
