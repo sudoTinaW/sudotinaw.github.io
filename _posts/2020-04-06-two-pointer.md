@@ -15,26 +15,36 @@ categories: Two Pointer
 
 Given an array of n integers, and a moving window(size k), move the window at each iteration from the start of the array, find the sum of the element inside the window at each moving.
 
-* result length is nums.length - k + 1
-* calculate the first k sum
-* Iterate right pointer from 1, to nums.length - k, for each right pointer 's value, remove left pointer's value and add right pointer's value.
+* left won't move when right < k.
+* When right >= k, sum will be added duirng each move of right, and left will move as well.
+* Note if you add the sum into result before sum is updated, the last updated sum has to be added outside the loop.
 
 
       public int[] winSum(int[] nums, int k) {
-              if(nums == null || nums.length < k || k <= 0) {
-                  return new int[0];
-              }
-              int[] result = new int[nums.length - k + 1];
-              int sum = 0;
-              for(int i = 0; i < k; i++) {
-                  sum += nums[i];
-              }
-              result[0] = sum;
-              for(int i = 1; i < nums.length - k + 1; i++) {
-                  sum = sum - nums[i - 1] + nums[i + k - 1];
-                  result[i] = sum;
-              }
 
-              return result;
-
+          if(nums == null || nums.length == 0) {
+              return new int[0]; 
           }
+
+          int[] result = new int[nums.length - k + 1];
+
+          int left = 0;
+          int sum = 0;
+          for(int right = 0; right < nums.length; right++) {
+              if(right < k) {
+                  sum += nums[right];
+                  continue;
+              }
+              result[right - k] = sum;
+              sum = sum - nums[left] + nums[right];
+              left++;
+          }
+
+          //because the result is added before sum update, 
+          //the last sum update won't be added into the result.
+          // We add here manually.
+
+          result[result.length - 1] = sum;
+
+          return result;
+      }
