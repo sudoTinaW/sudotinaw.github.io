@@ -1,5 +1,9 @@
 ---
 published: true
+layout: post
+title: Two Pointer
+date: '2019-04-06 14:50:00 -0000'
+categories: Two Pointer
 ---
 # Two Pointer
 ## Same Directions
