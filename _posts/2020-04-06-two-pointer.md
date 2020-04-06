@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 # Two Pointer
 ## Same Directions
@@ -37,4 +37,3 @@ Given an array of n integers, and a moving window(size k), move the window at ea
               return result;
 
           }
-
