@@ -62,42 +62,42 @@ https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
     * How to write a Comparator
     * Since the question requires return indexes, and we need to sort. Here we introduce Pair object to encapsulate the index and nums[index].
     * Since left pointer is moving, its boundary needs to tested all the time before it is used.
+    
+          public int[] twoSum7(int[] nums, int target) {
+           int[] result = new int[2];
 
-	public int[] twoSum7(int[] nums, int target) {
-       int[] result = new int[2];
-       
-       if(nums == null || nums.length == 0) {
-           return result;
-       }
-       
-       if(target < 0) {
-           target = -target;
-       }
-       
-       Pair[] pairs = new Pair[nums.length];
-       for(int i = 0; i < nums.length; i++) {
-           pairs[i] = new Pair(i, nums[i]);
-       }
-       
-       Arrays.sort(pairs, new MyComparator());
-       
-       int left = 0;
-       for(int right = 1; right < pairs.length; right++) {
-            while(left < right && pairs[right].value - pairs[left].value > target) {
-               left++;
-                
-            }
-            if(left < right && pairs[right].value - pairs[left].value == target) {
-               result[0] = Math.min(pairs[right].index + 1, pairs[left].index + 1);
-               result[1] = Math.max(pairs[right].index + 1, pairs[left].index + 1);
-               return result; 
+           if(nums == null || nums.length == 0) {
+               return result;
            }
 
-           
+           if(target < 0) {
+               target = -target;
+           }
 
-       }
-       return result;
-    }
+           Pair[] pairs = new Pair[nums.length];
+           for(int i = 0; i < nums.length; i++) {
+               pairs[i] = new Pair(i, nums[i]);
+           }
+
+           Arrays.sort(pairs, new MyComparator());
+
+           int left = 0;
+           for(int right = 1; right < pairs.length; right++) {
+                while(left < right && pairs[right].value - pairs[left].value > target) {
+                   left++;
+
+                }
+                if(left < right && pairs[right].value - pairs[left].value == target) {
+                   result[0] = Math.min(pairs[right].index + 1, pairs[left].index + 1);
+                   result[1] = Math.max(pairs[right].index + 1, pairs[left].index + 1);
+                   return result; 
+               }
+
+
+
+           }
+           return result;
+        }
 
 
 
