@@ -93,11 +93,9 @@ https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
                    return result; 
                }
 
-
-
            }
-           return result;
-        }
+             return result;
+          }
 
 
 
