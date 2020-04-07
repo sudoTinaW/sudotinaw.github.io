@@ -54,13 +54,16 @@ categories: Two Pointer
           return result;
       }
       
-2. Two Sum - Difference equals to target
+2.Two Sum - Difference equals to target
 
-  https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
-
+[https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description](https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description)
 * Two differences usually invlove sorting and two pointer. Because after sorting, the difference between right pointer and left pointer has an order as well. The closer, the smaller the difference is. Therefore, the left pointer doesn't need to go back. If the current left doesn't meet the requirement, the elements on the left side of left pointer won't meet the requirement neither.
+
 * Consider when left pointer needs to move, which is, left < right and pairs[right].value - pairs[left].value > target
+
+
 * After left move, when the difference == target return result
+
 * There are other details for this question
 	* a - b or b - a, the result is the same. Therefore, target can be treated as positive all the time.
     * How to write a Comparator
@@ -102,11 +105,11 @@ categories: Two Pointer
           }
    
    
-3. Remove Duplicates from Sorted Array
+3.Remove Duplicates from Sorted Array
 
-  https://www.lintcode.com/problem/remove-duplicates-from-sorted-array/solution
-
+[  https://www.lintcode.com/problem/remove-duplicates-from-sorted-array/solution](  https://www.lintcode.com/problem/remove-duplicates-from-sorted-array/solution)
 * Left pointer will move when nums[right] != nums[left].
+
 * Copy the right pointer's value to the left pointer's place after left moves.
 
 
