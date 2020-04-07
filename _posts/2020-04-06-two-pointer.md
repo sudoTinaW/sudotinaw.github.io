@@ -7,7 +7,11 @@ categories: Two Pointer
 ---
 - Feature: Left pointer doesn't need to go back, i.e., when right pointer moves to the next position, left pointer doesn't need to start over from the beginning. Instead, it can stay at where it is or move forward.
 
-- Tempalte: Right pointer will iterate through the list, calculate the results and decide when and how left pointer will move depending on the right pointer's value.
+- Tempalte: Right pointer will iterate through the list, calculate the results and decide when and how left pointer will move depending on the right pointer's value. 
+	- left pointer moves 1 step when right pointer moves 1 step
+    - left pointer move 0 or 1 step when right pointer moves 1 step
+    - left pointer moves 0 or multiple steps when right pointer moves 1 step.
+    - In general cases, the result will be updated after left is moved to its place.
 
 ## Same Directions
 
@@ -61,7 +65,7 @@ https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
 	* a - b or b - a, the result is the same. Therefore, target can be treated as positive all the time.
     * How to write a Comparator
     * Since the question requires return indexes, and we need to sort. Here we introduce Pair object to encapsulate the index and nums[index].
-    * Since left pointer is moving, its boundary needs to tested all the time before it is used.
+    * Since left pointer is moving inside a while loop, its boundary needs to tested all the time before it is used.
     
           public int[] twoSum7(int[] nums, int target) {
            int[] result = new int[2];
@@ -100,7 +104,11 @@ https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
 
 https://www.lintcode.com/problem/remove-duplicates-from-sorted-array/solution
 
-    public int removeDuplicates(int[] nums) {
+* Left pointer will move when nums[right] != nums[left].
+* Copy the right pointer's value to the left pointer's place after left moves.
+
+
+      public int removeDuplicates(int[] nums) {
         
         if(nums == null || nums.length == 0) {
             return 0;
@@ -115,7 +123,7 @@ https://www.lintcode.com/problem/remove-duplicates-from-sorted-array/solution
         }
         return left + 1;
     
-    }
+      }
 
 
 
