@@ -11,15 +11,14 @@ categories: Two Pointer
 
 ## Same Directions
 
-1.Window Sum
+1. Window Sum
 
 [https://www.lintcode.com/problem/window-sum/description](https://www.lintcode.com/problem/window-sum/description)
 
-Given an array of n integers, and a moving window(size k), move the window at each iteration from the start of the array, find the sum of the element inside the window at each moving.
-
 * left won't move when right < k.
-* When right >= k, sum will be added duirng each move of right, and left will move as well.
-* Note if you add the sum into result before sum is updated, the last updated sum has to be added outside the loop.
+* When right >= k,left will move when right moves.
+* When right >= k, result will be added when right moves.
+* Note result has been updated before left moves, so the last result can not be added inside the loop. The last result is added after the loop. 
 
 
       public int[] winSum(int[] nums, int k) {
@@ -50,3 +49,56 @@ Given an array of n integers, and a moving window(size k), move the window at ea
 
           return result;
       }
+      
+2. Two Sum - Difference equals to target
+
+https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
+
+* Two differences usually invlove sorting and two pointer. Because after sorting, the difference between right pointer and left pointer has an order as well. The closer, the smaller the difference is. Therefore, the left pointer doesn't need to go back. If the current left doesn't meet the requirement, the elements on the left side of left pointer won't meet the requirement neither.
+* Consider when left pointer needs to move, which is, left < right and pairs[right].value - pairs[left].value > target
+* After left move, when the difference == target return result
+* There are other details for this question
+	* a - b or b - a, the result is the same. Therefore, target can be treated as positive all the time.
+    * How to write a Comparator
+    * Since the question requires return indexes, and we need to sort. Here we introduce Pair object to encapsulate the index and nums[index].
+    * Since left pointer is moving, its boundary needs to tested all the time before it is used.
+
+	public int[] twoSum7(int[] nums, int target) {
+       int[] result = new int[2];
+       
+       if(nums == null || nums.length == 0) {
+           return result;
+       }
+       
+       if(target < 0) {
+           target = -target;
+       }
+       
+       Pair[] pairs = new Pair[nums.length];
+       for(int i = 0; i < nums.length; i++) {
+           pairs[i] = new Pair(i, nums[i]);
+       }
+       
+       Arrays.sort(pairs, new MyComparator());
+       
+       int left = 0;
+       for(int right = 1; right < pairs.length; right++) {
+            while(left < right && pairs[right].value - pairs[left].value > target) {
+               left++;
+                
+            }
+            if(left < right && pairs[right].value - pairs[left].value == target) {
+               result[0] = Math.min(pairs[right].index + 1, pairs[left].index + 1);
+               result[1] = Math.max(pairs[right].index + 1, pairs[left].index + 1);
+               return result; 
+           }
+
+           
+
+       }
+       return result;
+    }
+
+
+
+
