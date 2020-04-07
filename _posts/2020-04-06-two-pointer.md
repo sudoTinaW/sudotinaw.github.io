@@ -96,7 +96,26 @@ https://www.lintcode.com/problem/two-sum-difference-equals-to-target/description
            }
              return result;
           }
+3. Remove Duplicates from Sorted Array
 
+https://www.lintcode.com/problem/remove-duplicates-from-sorted-array/solution
+
+    public int removeDuplicates(int[] nums) {
+        
+        if(nums == null || nums.length == 0) {
+            return 0;
+        }
+        int left = 0;
+        for(int right = 0; right < nums.length; right++) {
+            if(nums[right] != nums[left]) {
+                left++;
+                nums[left] = nums[right];
+            }
+            
+        }
+        return left + 1;
+    
+    }
 
 
 
