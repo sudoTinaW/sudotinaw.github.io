@@ -5,7 +5,7 @@ date: '2020-04-09 16:50:00 -0000'
 categories: Dynamic Programming
 ---
 
-Dynamic Programming can be a subtle question during an interview. It is not like an alogrithm as divide and conquer. It is more like a way of thinking.
+Dynamic Programming(DP) can be a subtle question during an interview. It is not like an alogrithm as divide and conquer. It is more like a way of thinking.
 
 
 Here are some my favorite blogs about DP.
