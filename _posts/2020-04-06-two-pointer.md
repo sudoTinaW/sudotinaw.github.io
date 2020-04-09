@@ -1,10 +1,13 @@
 ---
 published: true
 layout: post
-title: Two Pointer
+title: 'Two Pointer '
 date: '2020-04-06 14:50:00 -0000'
 categories: Two Pointer
 ---
+Two Pointer questions can be divided into 2 catergories, same direction and two direction.
+
+
 - Feature: Left pointer doesn't need to go back, i.e., when right pointer moves to the next position, left pointer doesn't need to start over from the beginning. Instead, it can stay at where it is or move forward.
 
 - Tempalte: Right pointer will iterate through the list, calculate the results and decide when and how left pointer will move depending on the right pointer's value. 
@@ -129,6 +132,3 @@ categories: Two Pointer
         return left + 1;
     
       }
-
-
-
