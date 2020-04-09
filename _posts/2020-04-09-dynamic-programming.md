@@ -8,7 +8,7 @@ categories: Dynamic Programming
 Dynamic Programming(DP) can be a subtle question during an interview. It is not like an alogrithm as divide and conquer. It is more like a way of thinking. Therefore, it is hard to find a template for it.
 
 
-Here are some my favorite blogs about DP.
+### Here are some my favorite blogs about DP.
 
 [https://mp.weixin.qq.com/s/pg-IJ8rA1duIzt5hW1Cycw](https://mp.weixin.qq.com/s/pg-IJ8rA1duIzt5hW1Cycw)
 
