@@ -5,7 +5,7 @@ title: 'Two Pointer '
 date: '2020-04-06 14:50:00 -0000'
 categories: Two Pointer
 ---
-Two Pointer questions can be divided into 2 catergories, same direction and two direction.
+Two Pointer questions can be divided into 2 catergories, same direction and differenct direction. It can usually decrease the time complexity from O(n^2) / O(n ^ 3) to O(n) / O(n ^ 2).
 
 
 - Feature: Left pointer doesn't need to go back, i.e., when right pointer moves to the next position, left pointer doesn't need to start over from the beginning. Instead, it can stay at where it is or move forward.
