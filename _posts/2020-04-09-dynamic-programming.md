@@ -1,5 +1,8 @@
 ---
 published: false
+layout: post
+date: '2020-04-09 16:50:00 -0000'
+categories: Dynamic Programming
 ---
 ## Dynamic Programming
 
