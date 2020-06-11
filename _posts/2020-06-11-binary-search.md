@@ -20,7 +20,7 @@ categories: Two Pointer
              = T(1) + logn * O(1)
              = O(log n)
 
-3. Iterative tempalte:
+3. Iterative Tempalte:
 
         public int binSearch(int[] nums, int target) {
         	//start and end are both valid indexes
@@ -49,5 +49,30 @@ categories: Two Pointer
             }
             
         }
+        
+        
+        
+ 4. Recursion Template:
+ 
+ 		int binSearch(int[] nums, int target, int start, int end) {
+        	if(start > end) {
+            	return -1;
+            }
+            
+            int mid = start + (end - start) / 2;
+            
+            if(nums[mid] == target) {
+            	return mid;
+            }
+            
+            if(nums[mid] < target) {
+            	reutrn binSearch(nums, target, mid + 1, end);
+            }
+            
+            return binSearch(nums, start, mid - 1, target);
+        
+        }
+        
+ 
 
 
