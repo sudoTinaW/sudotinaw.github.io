@@ -20,6 +20,4 @@ categories: Two Pointer
          = T(1) + logn * O*(1)
          = O(log n)
 
-3. Iterative tempalte:
-		
-
+3. Iterative tempalte:asdfadf
