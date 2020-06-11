@@ -13,11 +13,41 @@ categories: Two Pointer
 2. Time Complexity : O(logn)
 
 
-    T(N) = T(n / 2) + O(1)
-         = T(n / 4) + O(1) + O(1)
-         = T(n / 8) + O(1) + O(1) + O(1)
-         ...
-         = T(1) + logn * O*(1)
-         = O(log n)
+        T(N) = T(n / 2) + O(1)
+             = T(n / 4) + O(1) + O(1)
+             = T(n / 8) + O(1) + O(1) + O(1)
+             ...
+             = T(1) + logn * O(1)
+             = O(log n)
 
-3. Iterative tempalte:asdfadf
+3. Iterative tempalte:
+
+        public int binSearch(int[] nums, int target) {
+        	//start and end are both valid indexes
+        	int start = 0;
+            int end = nums.length() - 1;
+        	// start and end will stop when they are next to each other. 
+            //By doing this, it can avoid only 2 elements left, and the range (start ~ mid or mid ~ end)
+            // doesn't decrease anymore issue. 
+            while(start + 1 < end) {
+            	int mid = start + (end - start) / 2;
+                if(nums[mid] == target) {
+                ...
+                }else if(nums[mid] < target) {
+                	start = mid;
+                }else {
+                	end = mid;
+                }
+            }
+            // At the end, we have 2 elements left, start and end. 
+            // Here we will seperately check which one is the answer
+            if(nums[start] == target) {
+            	return start;
+            }
+            if(nums[end] == target) {
+            	return end;
+            }
+            
+        }
+
+
