@@ -55,7 +55,8 @@ categories: Two Pointer
  4. Recursion Template:
  
  		int binSearch(int[] nums, int target, int start, int end) {
-        	if(start > end) {
+        	
+            if(start > end) {
             	return -1;
             }
             
@@ -72,6 +73,15 @@ categories: Two Pointer
             return binSearch(nums, start, mid - 1, target);
         
         }
+
+
+Iterative Vs Recursion
+
+In practise, recursion is not recommended. It can easily cause stack overflow. The recursion way will only be used when the iterative way is too complicated to implement.
+
+Problems
+
+
         
  
 
