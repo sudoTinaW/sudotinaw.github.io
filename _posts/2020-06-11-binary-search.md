@@ -4,6 +4,8 @@ layout: post
 date: '2020-06-11 14:50:00 -0000'
 categories: Two Pointer
 ---
+## Basic Knowledge: 
+
 1. What Type of Questions can be Soloved by Binary Search Alogrithm?
 
 	1. Given an **sorted** array and a target, to find any,last,first position of target in the array. 
@@ -19,7 +21,6 @@ categories: Two Pointer
              ...
              = T(1) + logn * O(1)
              = O(log n)
-
 3. Iterative Tempalte:
 
         public int binSearch(int[] nums, int target) {
@@ -79,10 +80,9 @@ Iterative Vs Recursion
 
 In practise, recursion is not recommended. It can easily cause stack overflow. The recursion way will only be used when the iterative way is too complicated to implement.
 
-Problems
+## Problems
 
-
-        
+1. [https://www.lintcode.com/problem/classical-binary-search/description](https://www.lintcode.com/problem/classical-binary-search/description)        
  
 
 
