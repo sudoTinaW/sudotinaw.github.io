@@ -2,7 +2,7 @@
 published: true
 layout: post
 date: '2020-06-11 14:50:00 -0000'
-categories: Two Pointer
+categories: Binary Search
 ---
 ## Binary Search
 
@@ -1081,4 +1081,3 @@ Another detail we need to watch out is when the two pointer moves towards 2 dire
         return result;
     }
 ```
-
