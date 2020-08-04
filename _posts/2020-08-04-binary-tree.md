@@ -1,6 +1,10 @@
 ---
 published: false
+layout: post
+date: '2020-08-04 14:50:00 -0000'
+categories: Binary Tree
 ---
-## A New Post
+## Binary Tree
 
-Enter text in [Markdown](http://daringfireball.net/projects/markdown/). Use the toolbar above, or click the **?** button for formatting help.
+
+
