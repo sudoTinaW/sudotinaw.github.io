@@ -4,7 +4,7 @@ layout: post
 date: '2020-06-11 14:50:00 -0000'
 categories: Binary Search
 ---
-Binary Search main thought is decrease the searching range by half for every loop. Its time complexity is O(logn).
+Binary Search main thought is decreasing the searching range by half for every loop. Its time complexity is O(logn).
 
 ## Basic Knowledge: 
 
