@@ -4,8 +4,6 @@ layout: post
 date: '2020-06-11 14:50:00 -0000'
 categories: Binary Search
 ---
-## Binary Search
-
 ## Basic Knowledge: 
 
 1. What Type of Questions can be Solved by Binary Search Algorithm?
