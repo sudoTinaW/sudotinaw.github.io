@@ -4,6 +4,8 @@ layout: post
 date: '2020-08-04 14:50:00 -0000'
 categories: Binary Tree
 ---
+Most of Binary Tree questions can be resolved by its three ways of traversal. Pre-order and Post-order are more often used.
+
 ### Basic Knowledge
 
 Binary Tree is expanded from linked list data structure. It has the character of inconsecutive data storage , and indirect data access(unlike array's direct access). **It can only be traversed by recursion**. 
