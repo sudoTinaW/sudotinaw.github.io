@@ -14,7 +14,7 @@ As the picture described, each method (including its instructions and parameters
 
 Because java can not save 2 types in one stack. We will create a customized object to bundle a tree node and marker(whether it is a value, or a node).
 
-![](E:\study\jiuzhang\Notes\BinaryTreeRecursionStack.JPG)
+![BinaryTreeRecursionStack](E:\study\jiuzhang\Notes\BinaryTreeRecursionStack.JPG)
 
 Since stack is popping in the reversed order of pushing. Here we need to save the nodes in reversed visited order, which means for preorder, we will push the nodes as right, left, and node itself. Right and left are pushed as subtree, node itself will be pushed as wait for visited.Most of Binary Tree questions can be resolved by its three ways of traversal. Pre-order and Post-order are more often used.
 
