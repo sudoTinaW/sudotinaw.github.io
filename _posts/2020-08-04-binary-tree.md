@@ -95,13 +95,15 @@ Analysis:
 
 There are multiple solution to resolve this question. Here is [an article](https://blog.csdn.net/zhuiyisinian/article/details/107946790) about all methods. I will use a general way that can solve pre-order, in-order, post-order together.
 
-Most of cases, after traversing a subtree, we need to return back to the parent node to find its siblings. So we need to save the node until both of its subtrees are visited. The parent node comes in first and comes out last. So we will use stack to save the node. 
+First of all, we need to understand the recursion way to resolve the preorder traversal. In the recursion way, the method are loaded into stack and ready to run line by line. I will draw a stack diagram to demonstrate the details. As the picture see, we will push tree node 3, tree node 2 and add integer 1 to the stack. Then, we will pop integer 1 and save it to the result. Then we will do the same thing, push tree node 5, tree node 4, and integer 2 into the stack, and later pop the integer2.
 
-When we push a node into a stack, there are two cases. One is we want to push it as a subtree's top so that we can find the subtrees after we visit the node. The other is push it as a node waiting for its pop turn. To tell which case a node is pushed for, we will bundle each node with an extra property.
+As the picture described, each method (including its instructions and parameters) are saved in the stack. By iterative way, we will also use stack to save recursion's method's each parameter sets and do instructions iteratively. Inside each method,  we can use queue + while loop to run each instructions, or we can save the instructions reversely into a stack to avoid an extra loop. Here we will use this way. 
+
+Because java can not save 2 types in one stack. We will create a customized object to bundle a tree node and marker(whether it is a value, or a node).
+
+![](E:\study\jiuzhang\Notes\BinaryTreeRecursionStack.JPG)
 
 Since stack is popping in the reversed order of pushing. Here we need to save the nodes in reversed visited order, which means for preorder, we will push the nodes as right, left, and node itself. Right and left are pushed as subtree, node itself will be pushed as wait for visited.
-
-
 
 ```java
 public class Solution {
