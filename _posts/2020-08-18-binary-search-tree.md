@@ -1,8 +1,11 @@
 ---
-published: false
+published: true
+layout: post
+date: '2020-08-18 14:50:00 -0000'
+categories: Binary Search Tree
 ---
 
-## Binary Tree
+## Binary Search Tree
 
 ### Basic Knowledge
 
@@ -655,4 +658,3 @@ public class Solution {
     
 }
 ```
-
