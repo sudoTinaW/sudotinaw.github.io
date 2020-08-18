@@ -4,19 +4,7 @@ layout: post
 date: '2020-08-04 14:50:00 -0000'
 categories: Binary Tree
 ---
-Analysis:
-
-There are multiple solution to resolve this question. Here is [an article](https://blog.csdn.net/zhuiyisinian/article/details/107946790) about all methods. I will use a general way that can solve pre-order, in-order, post-order together.
-
-First of all, we need to understand the recursion way to resolve the preorder traversal. In the recursion way, the method are loaded into stack and ready to run line by line. I will draw a stack diagram to demonstrate the details. As the picture see, we will push tree node 3, tree node 2 and add integer 1 to the stack. Then, we will pop integer 1 and save it to the result. Then we will do the same thing, push tree node 5, tree node 4, and integer 2 into the stack, and later pop the integer2.
-
-As the picture described, each method (including its instructions and parameters) are saved in the stack. By iterative way, we will also use stack to save recursion's method's each parameter sets and do instructions iteratively. Inside each method,  we can use queue + while loop to run each instructions, or we can save the instructions reversely into a stack to avoid an extra loop. Here we will use this way. 
-
-Because java can not save 2 types in one stack. We will create a customized object to bundle a tree node and marker(whether it is a value, or a node).
-
-![BinaryTreeRecursionStack](E:\study\jiuzhang\Notes\BinaryTreeRecursionStack.JPG)
-
-Since stack is popping in the reversed order of pushing. Here we need to save the nodes in reversed visited order, which means for preorder, we will push the nodes as right, left, and node itself. Right and left are pushed as subtree, node itself will be pushed as wait for visited.Most of Binary Tree questions can be resolved by its three ways of traversal. Pre-order and Post-order are more often used.
+## Binary Tree
 
 ### Basic Knowledge
 
@@ -104,6 +92,8 @@ Because java can not save 2 types in one stack. We will create a customized obje
 ![](E:\study\jiuzhang\Notes\BinaryTreeRecursionStack.JPG)
 
 Since stack is popping in the reversed order of pushing. Here we need to save the nodes in reversed visited order, which means for preorder, we will push the nodes as right, left, and node itself. Right and left are pushed as subtree, node itself will be pushed as wait for visited.
+
+
 
 ```java
 public class Solution {
@@ -574,124 +564,7 @@ This is a basic question. Since the method needs a return type, and the method d
     }
 ```
 
-######  [85. Insert Node in a Binary Search Tree](https://www.lintcode.com/problem/insert-node-in-a-binary-search-tree/description)
-
-Description:
-
-Given a binary search tree and a new tree node, insert the node into the tree. You should keep the tree still be a valid binary search tree.
-
-```
-Example 1:
-	Input:  tree = {}, node = 1
-	Output:  1
-	
-	Explanation:
-	Insert node 1 into the empty tree, so there is only one node on the tree.
-
-Example 2:
-	Input: tree = {2,1,4,3}, node = 6
-	Output: {2,1,4,3,6}
-	
-	Explanation: 
-	Like this:
-
-
-
-	  2             2
-	 / \           / \
-	1   4   -->   1   4
-	   /             / \ 
-	  3             3   6
-		
-```
-
-Analysis:
-
-This question is a combination of bottom-up and top-down traversal. The return value shall be the root of the tree after insertion. First we top-down traverse the tree to find the insertion place. **We will always add new nodes at the bottom of Binary Search Tree.** for each node, we traverse either its left subtree or right subtree., not both. After the recursion returned, we will link the newly inserted subtree's root to the current node.
-
-```java
-    public TreeNode insertNode(TreeNode root, TreeNode node) {
-        
-        if(root == null) {
-            return node;
-        }
-
-        if(root.val > node.val) {
-            TreeNode left = insertNode(root.left, node);
-            root.left = left;
-
-        }else {
-            TreeNode right = insertNode(root.right, node);
-            root.right = right;
-        }
-        
-        return root;
-        
-    }
-    
-```
-
-###### [1008. Construct Binary Search Tree from Preorder Traversal Leetcode](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)
-
-Description:
-
-Return the root node of a binary **search** tree that matches the given `preorder` traversal.
-
-*(Recall that a binary search tree is a binary tree where for every node, any descendant of `node.left` has a value `<` `node.val`, and any descendant of `node.right` has a value `>` `node.val`. Also recall that a preorder traversal displays the value of the `node` first, then traverses `node.left`, then traverses `node.right`.)*
-
-It's guaranteed that for the given test cases there is always possible to find a binary search tree with the given requirements.
-
-Example 1:
-
-```
-Input: [8,5,1,7,10,12]
-Output: [8,5,10,1,7,null,12]
-```
-
-Constraints:
-
-- `1 <= preorder.length <= 100`
-- `1 <= preorder[i] <= 10^8`
-- The values of `preorder` are distinct.
-
-Analysis:
-
-This questions is just loop each node + insert each node into BST.
-
-```java
-public TreeNode bstFromPreorder(int[] preorder) {
-    
-    if(preorder == null || preorder.length == 0) {
-        return null;
-    }
-    
-    TreeNode root = new TreeNode(preorder[0]);
-    
-    for(int i = 1; i < preorder.length; i++) {
-        TreeNode newNode = new TreeNode(preorder[i]);
-        insert(root, newNode);
-    }
-    
-    return root;
-}
-
-private TreeNode insert(TreeNode cur, TreeNode newNode) {
-    
-    if(cur == null) {
-        return newNode;
-    }
-    
-    if(newNode.val < cur.val) {
-        cur.left = insert(cur.left, newNode);
-    }else if(newNode.val > cur.val) {
-        cur.right = insert(cur.right, newNode);
-    }
-    
-    return cur;
-}
-```
-
-######  [93. Balanced Binary Tree](https://www.lintcode.com/problem/balanced-binary-tree/description)
+###### [93. Balanced Binary Tree](https://www.lintcode.com/problem/balanced-binary-tree/description)
 
 Description:
 
@@ -789,165 +662,6 @@ class ResultType {
         
         this.depth = depth;
         this.isBalanced = isBalanced;
-    }
-}
-```
-
-###### [95. Validate Binary Search Tree](https://www.lintcode.com/problem/validate-binary-search-tree/description)
-
-Description:
-
-Given a binary tree, determine if it is a valid binary search tree (BST).
-
-Assume a BST is defined as follows:
-
-- The left subtree of a node contains only nodes with keys **less than** the node's key.
-- The right subtree of a node contains only nodes with keys **greater than** the node's key.
-- Both the left and right subtrees must also be binary search trees.
-- A single node tree is a BST
-
-Example 1:
-
-```
-Input:  {-1}
-Output：true
-Explanation：
-For the following binary tree（only one node）:
-	      -1
-This is a binary search tree.
-```
-
-Example 2:
-
-```
-Input:  {2,1,4,#,#,3,5}
-Output: true
-For the following binary tree:
-	  2
-	 / \
-	1   4
-	   / \
-	  3   5
-This is a binary search tree.
-```
-
-Analysis:
-
-From the description, we can tell BST's character is all nodes in left subtree are smaller than root's value, and all nodes in right subtree are greater than root's value. Therefore, we need to maintain a max value for left subtree, and a min value for right subtree. 
-
-Here we have 2 ways to save the max and min value for left and right subtree. We can save the min and max value in an return object or we can save them as the input parameters. If we are using the first way, we will use bottom-up to resolve the issue. If we are using the second way, we will use top-down traversal with a return type to solve this problem.
-
-Top-down Traversal:
-
-We can save each node's max and min range as the input parameter, and check if cur is in the min and max range. After call recursion, we will also need to validate if left sub tree is valid, and right sub tree is valid. 
-
-```java
-public boolean isValidBST(TreeNode root) {
-        return traverse(root, Long.MAX_VALUE, Long.MIN_VALUE);
-    }
-    
-private boolean traverse(TreeNode cur, long max, long min) {
-
-    if(cur == null) {
-        return true;
-    }
-
-    boolean left = traverse(cur.left, cur.val, min);
-    boolean right = traverse(cur.right, max, cur.val);
-
-
-    if(left && right && cur.val > min && cur.val < max) {
-        return true;
-    }
-
-    return false;
-
-}
-```
-
-
-
-At the beginning we don't know the root range. Root range can be any integer number, even the biggest integer. Therefore, we set the root range bigger than possible. This is the not the best way. If we only allow integer type (same data range as the result), we shall set the root as `NULL`.  Setting Root range as `NULL`  makes more sense, because root's true range is not between biggest and smallest number but unknown. Here I will post another version using `NULL` as the root range.
-
-```java
-    public boolean isValidBST(TreeNode root) {
-        return traverse(root, null, null);
-    }
-    
-    private boolean traverse(TreeNode cur, Integer max, Integer min) {
-        
-        if(cur == null) {
-            return true;
-        }
-        
-       if(min != null && cur.val <= min) {
-           return false;
-       }
-       
-       if(max != null && cur.val >= max) {
-           
-           return false;
-       }
-        
-        return traverse(cur.left, cur.val, min) && traverse(cur.right, max, cur.val);
-    }
-```
-
-Bottom-up:
-
-We need to create a `ResultType`, which includes each node's range and their validation information. 
-
-The current node will be valid if its left subtree and right subtree are valid, and cur's value is greater than left subtree's max value and less than right subtree's min value, the cur's value is valid. Since all one node cases are valid BST, we will set one node's min and max as null.
-
-Here we need to pay attention of some details, each `ResultType` saves its real range which are `(left.min, right.max)`. When we use the left and right subtree's result to validate the BST, the current node's value shall be in the range `(left.max, right.min)` .
-
-```java
-public class Solution {
-    /**
-     * @param root: The root of binary tree.
-     * @return: True if the binary tree is BST, or false
-     */
-    public boolean isValidBST(TreeNode root) {
-        ResultType result = divideConquer(root);
-        return result.isValid;
-    }
-    
-    private ResultType divideConquer(TreeNode cur) {
-        
-        if(cur == null) {
-            return new ResultType(true);
-        }
-
-
-        ResultType left = divideConquer(cur.left);
-        ResultType right = divideConquer(cur.right);
-    
-        if(!left.isValid || !right.isValid) {
-            return new ResultType(false);
-        }
-        
-        if((left.max != null && cur.val <= left.max.val) 
-           || (right.min != null && cur.val >= right.min.val)) {
-            return new ResultType(false);
-        }
-        
-        ResultType result = new ResultType(true);
-        result.min = left.min == null ? cur : left.min;
-        result.max = right.max == null ? cur : right.max;
-        return result;
-    }
-}
-
-class ResultType {
-    TreeNode max;
-    TreeNode min;
-    boolean isValid;
-    
-    ResultType(boolean isValid) {
-        this.isValid = isValid;
-        max = null;
-        min = null;
-        
     }
 }
 ```
@@ -1911,97 +1625,6 @@ private void traverse(TreeNode cur, int k1, int k2, List<Integer> result) {
 }
 ```
 
-###### [106. Convert Sorted List to Binary Search Tree](https://www.lintcode.com/problem/convert-sorted-list-to-binary-search-tree/solution)
-
-Description:
-
-Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
-
-```
-Example 1:
-	Input: array = 1->2->3
-	Output:
-		 2  
-		/ \
-		1  3
-		
-Example 2:
-	Input: 2->3->6->7
-	Output:
-		 3
-		/ \
-	   2   6
-		     \
-		      7
-
-	Explanation:
-	There may be multi answers, and you could return any of them.
-```
-
-  Analysis:
-
-This question can be resolved by 2 ways. First, we can split the list from middle, the left side will be middle point's left sub tree, and the right side will be middle point's right sub tree. Time complexity will be O(n^2) because we need O(n) time to find the middle point, and there are n nodes. Second, we can build the tree using in-order traversal. By using in-order traversal, we can build the tree in order of sequential access of linked list. Thus we can avoid finding middle point time to decrease the time complexity to O(n). Here we will only show the in-order traversal solution.
-
-This question is a bit different from other binary tree questions from 2 aspects,
-
-- Most questions are given a binary tree as input. Which means, dividing work is naturally done (left and right subtree). However, this question we need to divide the list first. To divide the list, we usually need to remember the start and end index of each division. (The thought is similar to **Merge Sort**) . For the linked list, since we can not access the element using start and end index, we will modify to use start node and length.
-- The question is using In-order traversal, not like other questions using top-down or post-order. We can not build root before left subtree, neither after right subtree.
-
-We will build the left subtree, create root node, build right subtree. Then connect the root with left and right subtree. The list pointer will move after we create a new tree node. To remember the moving pointer, we can use a global variable, or pass as input and return moved pointer as one of the return results.
-
- 
-
-```java
-public class Solution {
-    /*
-     * @param head: The first node of linked list.
-     * @return: a tree node
-     */
-     
-    private ListNode cur;
-    
-    public TreeNode sortedListToBST(ListNode head) {
-        int length = getLength(head);
-        cur = head;
-        TreeNode root = build(length);
-        return root;
-        
-    }
-    
-    private TreeNode build(int length) {
-        
-        if(length <= 0) {
-            return null;
-        }
-        
-        if(cur == null) {
-            return null;
-        }
-        
-        TreeNode left = build(length / 2);
-        TreeNode root = new TreeNode(cur.val);
-        cur = cur.next;
-        TreeNode right = build(length - length / 2 - 1);
-        
-        root.left = left;
-        root.right = right;
-        
-        return root;
-    }
-    
-    private int getLength(ListNode head) {
-        
-        int size = 0;
-        while(head != null) {
-            head = head.next;
-            size++;
-        }
-        return size;
-    }
-    
-}
-```
-
 ### Summery
 
 ###### Save the variable as input parameters' property, as class property, or returned result's property?
@@ -2026,3 +1649,6 @@ Variables can be saved into different ways, and sometimes, different ways can sw
     Since the variable is an input parameter, it has to be passed as an input parameter. However, it can only get updated in bottom-down direction, we have to save the updated variable's value in the returned result. 
 
     Eg., in question  [106. Convert Sorted List to Binary Search Tree](#106. Convert Sorted List to Binary Search Tree) , the variable linked list head. It is a method input parameter, and it can only be updated bottom-up. So we can save the variable both as input parameter and returned result property. Or we can save it as a class property.
+
+  
+
