@@ -8,7 +8,7 @@ categories: Binary Tree
 
 ### Basic Knowledge
 
-Binary Tree is expanded from linked list data structure. It has the character of inconsecutive data storage , and indirect data access(unlike array's direct access). **It can only be traversed by recursion**. 
+Binary Tree is a data structure extended from linked list data structure. It has the character of inconsecutive data storage , and indirect data access(unlike array's direct access). **It suits to traverse by recursion**. 
 
 There are 3 ways of traversal. Most of the issues can be resolved using the 3 ways of traversal. 
 
@@ -1649,6 +1649,3 @@ Variables can be saved into different ways, and sometimes, different ways can sw
     Since the variable is an input parameter, it has to be passed as an input parameter. However, it can only get updated in bottom-down direction, we have to save the updated variable's value in the returned result. 
 
     Eg., in question  [106. Convert Sorted List to Binary Search Tree](#106. Convert Sorted List to Binary Search Tree) , the variable linked list head. It is a method input parameter, and it can only be updated bottom-up. So we can save the variable both as input parameter and returned result property. Or we can save it as a class property.
-
-  
-
