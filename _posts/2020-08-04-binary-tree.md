@@ -4,11 +4,9 @@ layout: post
 date: '2020-08-04 14:50:00 -0000'
 categories: Binary Tree
 ---
-## Binary Tree
+Binary Tree is a data structure extended from linked list data structure. It has the character of inconsecutive data storage , and indirect data access(unlike array's direct access). **It suits to traverse by recursion**. 
 
 ### Basic Knowledge
-
-Binary Tree is a data structure extended from linked list data structure. It has the character of inconsecutive data storage , and indirect data access(unlike array's direct access). **It suits to traverse by recursion**. 
 
 There are 3 ways of traversal. Most of the issues can be resolved using the 3 ways of traversal. 
 
