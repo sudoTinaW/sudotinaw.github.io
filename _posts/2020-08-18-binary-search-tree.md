@@ -5,13 +5,11 @@ date: '2020-08-18 14:50:00 -0000'
 categories: Binary Search Tree
 ---
 
-## Binary Search Tree
-
-### Basic Knowledge
-
 The blog is written based on [labuladong](https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/er-cha-sou-suo-shu-cao-zuo-ji-jin) git book.
 
 Binary Search Tree is one of the commonly used binary tree. Its definition is all nodes on the left subtree are <= the node, and all nodes on the right subtree are >= the node.
+
+### Basic Knowledge
 
 BST's value has orders. Therefore, most of its operations doesn't need to search both right and left subtree, and its template is a bit different from the general traverse.
 
