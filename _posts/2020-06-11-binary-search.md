@@ -643,7 +643,7 @@ Output: -1.
 
 Analysis:
 
-![](E:\study\jiuzhang\Notes\searchInRotatedSortedArray.JPG)
+![SearchInRotatedSortedArray](/asset/searchInRotatedSortedArray.JPG)
 
 This question can be resolved by find the pivot and binary search 2 sorted parts. However, we can also combine the 2 steps into one.
 
