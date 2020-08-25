@@ -818,11 +818,14 @@ This question is a hard level question. The first brute force way will be merge 
 
 **binary search key point is trying to narrow the search range by half every time**. Here we need find a way to decrease half of the search range in O(1) time.  If we merge 2 sorted array and find the kth element. We only need to merge array of k-length. Same as this thought, we only need to search first k-length elements.
 
-Imagine there are k-length elements. We start our search from 0. The difference between the normal binary search and this imagination is our target is the end. We need to approach our target by only moving start. If as the imagination, we have a k-length sorted array, we can access the kth element in O(1). However, this question has 2 arrays, we can not access kth element without a traverse. By using binary search, we can skip some parts during the traverse of the final imaginary sorted array. Since we are looking for the end, our end is fixed. We can only move 2 starts.
+Imagine there are k-length elements. We start our search from 0. The difference between the normal binary search and this imagination is our target is the end. We need to approach our target by only moving start. If as the imagination, we have a k-length sorted array, we can access the kth element in O(1). However, this question has 2 arrays, we can not access kth element without a traverse. By using binary search, we can skip some parts during the traverse of the final imaginary sorted array. Since we are looking for the end, our end is fixed. We can only move 2 starts. 
+
+![MedianOf2SortedArray]({{site.baseurl}}//asset/medianOf2SortedArray.JPG)
 
 if A[k / 2 - 1] < B[k / 2 - 1], the k length element will not be in the first k / 2 length of A. Because If we pick k/ 2 length elements from A and k / 2 length elements from B, our kth element will be the last element of either A or B. However, we know A[k / 2 - 1] < B[k / 2 - 1], A[k / 2 - 1] will not be the last element, neither any smaller elements of A. Now we can narrow the search range of A from(0, k) to (k/2, k).
 
 Similar, if B[k / 2 - 1] < A[k / 2 - 1], we can  narrow the search range of B from(0, k) to (k/2, k).
+
 
 Since we use length and starting point to narrow the search range. There isn't an obvious start, mid, end. We will use a more general binary search implementation as recursion. 
 
