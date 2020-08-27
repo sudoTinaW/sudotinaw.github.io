@@ -1629,20 +1629,21 @@ private void traverse(TreeNode cur, int k1, int k2, List<Integer> result) {
 
 Variables can be saved into different ways, and sometimes, different ways can switch in between. Here I will summarize some general rules with example.
 
-- **The variable's value, which can be calculated from top to bottom, is easier to save as input parameters.** Top-down is usually easier than bottom-up because top-down is reasoning from requirements to result. If the variable can be calculated by both top-down and bottom-up, we will choose top-down first.
+- **The variable's value, which can be calculated from top to bottom, is easier to save as input parameters. That is to say, root's value doesn't depend on neither right or left subtree's value.** Top-down is usually easier than bottom-up because top-down is reasoning from requirements to result. If the variable can be calculated by both top-down and bottom-up, we will choose top-down first.
 
-  -  The root's initial value is known. Eg., in question  [106. Convert Sorted List to Binary Search Tree](#106. Convert Sorted List to Binary Search Tree) , the variable length. The root's length is known, and other children's values can be calculated in top-down directions.
-  -  The root's initial value is unknown. Usually, the variable is a property of left and right sub tree. Even roots is unknown, it doesn't matter. All other children's value can be calculated in top-down directions. Eg., in question  [95. Validate Binary Search Tree](# 95. Validate Binary Search Tree) the variable min and max. We can calculate the min and max range before recursion.
+  - **One of the most commonly usage is DFS. If the problem requires *all* solutions, you need to consider use DFS search, and its parameters are all input parameters**
+  - The root's initial value is known. Eg., in question  [106. Convert Sorted List to Binary Search Tree](#106. Convert Sorted List to Binary Search Tree) , the variable length. The root's length is known, and other children's values can be calculated in top-down directions.
+  - The root's initial value is unknown. Usually, the variable is a property of left and right sub tree. Even roots is unknown, it doesn't matter. All other children's value can be calculated in top-down directions. Eg., in question  [95. Validate Binary Search Tree](# 95. Validate Binary Search Tree) the variable min and max. We can calculate the min and max range before recursion.
 
-- **The variable's value, which can be calculated from bottom to top and its initial value is not an input parameter, but a constant, shall be saved in returned result's property. Usually, if we need some median variables to help calculate the final result, we will save it in the returned result's property** If the variable at root's value is unknown, and it is hard to calculate its left and right child's value top-down neither. We will use bottom-up way. 
+- **The variable's value, which can be calculated from bottom to top and its initial value is not an input parameter, but a constant, shall be saved in returned result's property. That is root's value depends on left and right subtree's value** If the variable at root's value is unknown, and it is hard to calculate its left and right child's value top-down neither. We will use bottom-up way. 
 
   - Eg., in question [93. Balanced Binary Tree](#93. Balanced Binary Tree), we don't know root's depth at the beginning, and we can not reasoning its left and right sub tree's depth either. Here it is better to save the depth in the returned result property.
 
-- **Saving as class property variable is the most powerful one. It can be used with top-down, in-order and post-order traverse. Unlikely saving in the returning type (post-order) which can only be returned level by level, or saving in the input parameter (top-down) which can only be built level by level, it can be calculated in any level and in any direction (top-down or bottom up).  However, it has side effects, it is better to be avoid.**
-
-  
+- **Saving as class property variable is the most powerful one. It can be used with preorder, in-order and post-order traverse. Unlikely saving in the returning type (post-order) which can only be returned level by level, or saving in the input parameter (top-down) which can only be built level by level, it can be calculated in any level and in any direction (top-down or bottom up).  However, it has side effects, it is better to be avoid.**
 
   - **One of the class variable usage is, the variable can only be calculated from bottom to top and its initial value is not constant(which will get from method inputs) .**
+
+  - **Another character that might imply to use class variable is root's value only depends on left subtree, but not right subtree**
 
     Since the variable is an input parameter, it has to be passed as an input parameter. However, it can only get updated in bottom-down direction, we have to save the updated variable's value in the returned result. 
 
