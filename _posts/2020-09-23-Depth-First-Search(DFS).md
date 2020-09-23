@@ -4,11 +4,9 @@ layout: post
 date: '2020-09-23 14:50:00 -0000'
 categories: DFS
 ---
-Depth First Seach is usually used in fiding all solutions. Its time complexity is high, therefore, result set can not be very big.
+Depth First Search is traversing through a multiple-branch decision tree. The question usually requires **all** solutions. Since DFS time complexity is O(2^n) or O(n!), tree's depth can not be very big. DFS is often used to resolve Combination and Permutation problems.
 
 ### Basic Knowledge
-
-Depth First Search is traversing through a multiple-branch decision tree. The question usually requires **all** solutions. Since DFS time complexity is O(2^n) or O(n!), tree's depth can not be very big. DFS is often used to resolve Combination and Permutation problems.
 
 DFS problem has a template. As long as you can draw the decision tree, you can resolve the issue by the template. Here is the template, modified from [labuladong](https://labuladong.gitbook.io/algo/suan-fa-si-wei-xi-lie/hui-su-suan-fa-xiang-jie-xiu-ding-ban) 
 
