@@ -10,7 +10,6 @@ The blog is written based on [labuladong](https://labuladong.gitbook.io/algo/shu
 Binary Search Tree is one of the commonly used binary tree. Its definition is all nodes on the left subtree are <= the node, and all nodes on the right subtree are >= the node.
 
 ### Basic Knowledge
-
 BST's value has orders. Therefore, most of its operations doesn't need to search both right and left subtree, and its template is a bit different from the general traverse.
 
 ```java
@@ -66,71 +65,77 @@ This is a binary search tree.
 
 Analysis:
 
-This question we need to maintain a max value for left subtree, and a min value for right subtree and make sure all nodes value are in the range of max and min. This question can not use the template to choose only one subtree to traverse.  
-
-Here we have 2 ways to save the max and min value for left and right subtree. We can save the min and max value in an return object or we can save them as the input parameters. If we are using the first way, we will use bottom-up to resolve the issue. If we are using the second way, we will use top-down traversal with a return type to solve this problem.
-
-**Note: If the current's node will influence all its subtrees in general, we can use extra input parameters to pass down the current node. *( 如果当前节点会对下面的子节点有整体影响，可以通过辅助函数增长参数列表，借助参数传递信息*)**
-
 Top-down Traversal:
 
-We can save each node's max and min range as the input parameter, and check if cur is in the min and max range. After call recursion, we will also need to validate if left sub tree is valid, and right sub tree is valid. 
+If a tree is a BST. All nodes on the left subtree must be less than its parent node, and all nodes on right subtree must be greater than its parent node. ***When we visit left or right subtree, we can not get root's value (because there is not a pointer from child to parent). Therefore, we need to pass root's value as a parameter.  What's more, left and right subtree's operation are different. If we want left and right subtree run the same operation(recursion required), we need to generalize the operation.*** Here, we will test whether a node is in a range. If it is a node in the left subtree, we will set its left range as negative infinity to make sure the left boundary check won't influence the whole result. Same as right node, we will set each right node's right boundary as positive infinity. From the picture, we can see the right boundary will be updated when we visit a node's left subtree, and the left boundary will be updated when we visit a node's right subtree. If we finish traverse the tree and all nodes are in their correct boundary, we can say BST is valid. If there is any node not in the range, we can stop traverse and return false right away.
+
+![](E:\study\jiuzhang\Notes\validateBST.jpg)
+
+This question can not use the template to choose only one subtree to traverse.
 
 ```java
-public boolean isValidBST(TreeNode root) {
-        return traverse(root, Long.MAX_VALUE, Long.MIN_VALUE);
-    }
+    public boolean isValidBST(TreeNode root) {
+            return traverse(root, Long.MAX_VALUE, Long.MIN_VALUE);
+        }
+        
+    private boolean traverse(TreeNode cur, long max, long min) {
     
-private boolean traverse(TreeNode cur, long max, long min) {
-
-    if(cur == null) {
+        if(cur == null) {
+            return true;
+        }
+        
+        if(cur.val <= min || cur.val >= max) {
+            return false;
+        }
+    
+        boolean left = traverse(cur.left, cur.val, min);
+        boolean right = traverse(cur.right, max, cur.val);
+    
+        if(!left || !right) {
+            return false;
+        }
+    
         return true;
+    
     }
-
-    boolean left = traverse(cur.left, cur.val, min);
-    boolean right = traverse(cur.right, max, cur.val);
-
-
-    if(left && right && cur.val > min && cur.val < max) {
-        return true;
-    }
-
-    return false;
-
-}
 ```
 
 At the beginning we don't know the root range. Root range can be any integer number, even the biggest integer. Therefore, we set the root range bigger than possible. This is the not the best way. If we only allow integer type (same data range as the result), we shall set the root as `NULL`.  Setting Root range as `NULL`  makes more sense, because root's true range is not between biggest and smallest number but unknown. Here I will post another version using `NULL` as the root range.
 
 ```java
     public boolean isValidBST(TreeNode root) {
-        return traverse(root, null, null);
+        
+        return helper(root, null, null);
     }
     
-    private boolean traverse(TreeNode cur, Integer max, Integer min) {
+    
+    private boolean helper(TreeNode cur, Integer min, Integer max) {
         
         if(cur == null) {
             return true;
         }
         
-       if(min != null && cur.val <= min) {
-           return false;
-       }
-       
-       if(max != null && cur.val >= max) {
-           
-           return false;
-       }
+        if((min != null && cur.val <= min) || (max != null && cur.val >= max)) {
+
+            return false;
+        }
         
-        return traverse(cur.left, cur.val, min) && traverse(cur.right, max, cur.val);
+        boolean left = helper(cur.left, min, cur.val);
+        boolean right = helper(cur.right, cur.val, max);
+        
+        if(!left || !right) {
+            return false;
+        }
+
+        
+        return true;
+
     }
 ```
 
 Bottom-up:
 
-We need to create a `ResultType`, which includes each node's range and their validation information. 
-
-The current node will be valid if its left subtree and right subtree are valid, and cur's value is greater than left subtree's max value and less than right subtree's min value, the cur's value is valid. Since all one node cases are valid BST, we will set one node's min and max as null.
+From bottom to top, If a node's left subtree and right subtree are valid, and its value is greater than left subtree's max value and less than right subtree's min value, it is a valid BST. Therefore, we need to remember each node's min and max in the result set so that we can use left's max and right's min value. Here we will create `ResultType` return object, which includes each node's max and min and their validation result. 
 
 Here we need to pay attention of some details, each `ResultType` saves its real range which are `(left.min, right.max)`. When we use the left and right subtree's result to validate the BST, the current node's value shall be in the range `(left.max, right.min)` .
 
@@ -600,7 +605,7 @@ This question can be resolved by 2 ways. First, we can split the list from middl
 This question is a bit different from other binary tree questions from 2 aspects,
 
 - Most questions are given a binary tree as input. Which means, dividing work is naturally done (left and right subtree). However, this question we need to divide the list first. To divide the list, we usually need to remember the start and end index of each division. (The thought is similar to **Merge Sort**) . For the linked list, since we can not access the element using start and end index, we will modify to use start node and length.
-- The question is using In-order traversal, not like other questions using top-down or post-order. We can not build root before left subtree, neither after right subtree.
+- The question is using In-order traversal, not like other questions using top-down or bottom-up method. We can not build root before left subtree, neither after right subtree.
 
 We will build the left subtree, create root node, build right subtree. Then connect the root with left and right subtree. The list pointer will move after we create a new tree node. To remember the moving pointer, we can use a global variable, or pass as input and return moved pointer as one of the return results.
 
@@ -656,3 +661,76 @@ public class Solution {
     
 }
 ```
+
+
+
+###### [448. Inorder Successor in BST](https://www.lintcode.com/problem/inorder-successor-in-bst/description?_from=ladder&&fromId=177)
+
+Description:
+
+Given a binary search tree ([See Definition](http://www.lintcode.com/problem/validate-binary-search-tree/)) and a node in it, find the in-order successor of that node in the BST.
+
+If the given node has no in-order successor in the tree, return `null`.
+
+Example 1:
+
+```
+Input: {1,#,2}, node with value 1
+Output: 2
+Explanation:
+  1
+   \
+    2
+```
+
+Example 2:
+
+```
+Input: {2,1,3}, node with value 1
+Output: 2
+Explanation: 
+    2
+   / \
+  1   3
+```
+
+Challenge:
+
+O(h), where h is the height of the BST.
+
+Notice:
+
+It's guaranteed *p* is one node in the given tree. (You can directly compare the memory address to find p)
+
+Analysis:
+
+If the node p doesn't have a right subtree, the successor will be its closet parent. If the node has a right subtree, the successor will be right subtree's left most node. Here we will draw those 2 conditions. 
+
+- From the picture, we can see, the stop condition is the pointer becomes null. When we traverse the tree, we either traverse left subtree or right subtree, not both. That is to say, when we traverse left subtree, we don't need to save the right subtree's operation, which will run after left subtree.  Therefore, we can use loop easily, instead of recursion. 
+
+- From the picture, we can see, the successor is the parent of last left child (left child may be null). Therefore, we need to save the parent node every time when we move to the left subtree. 
+- One thing we need to pay attention, we are not stopping the loop even when we find the target p. We will continue to move to its right.
+
+![](E:\study\jiuzhang\Notes\inorderSuccessor.jpg)
+
+```java
+    
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        
+        TreeNode next = null;
+        while(root != null) {
+            
+            if(root.val <= p.val) {
+                root = root.right;
+            }else {
+                next = root;
+                root = root.left;
+            }
+        
+        }
+        
+        return next;
+        
+    }
+```
+
