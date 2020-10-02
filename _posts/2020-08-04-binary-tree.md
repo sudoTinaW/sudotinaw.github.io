@@ -10,7 +10,7 @@ Binary Tree is a data structure extended from linked list data structure. It has
 
 There are 3 ways of traversal. Most of the issues can be resolved using the 3 ways of traversal. 
 
-Pre-order(Top-down) Traversal,
+Pre-order Traversal,
 
 ```java
 public void traverse(TreeNode root) { 
@@ -30,7 +30,7 @@ public void traverse(TreeNode root) {
 }
 ```
 
-Post-order(Bottom-up) Traversal,
+Post-order Traversal,
 
 ```java
 public void traverse(TreeNode root) { 
@@ -40,23 +40,21 @@ public void traverse(TreeNode root) {
 }
 ```
 
-Top-down and Bottom-up traversal are often used. 
+We can resolve a binary tree problem using traversal way or divide and conquer way.
 
-###### Top-down Traversal (先做事，再分割成左右)
+###### Traversal: Do something for one node and all nodes on its subtrees need to do the same operation.
 
 - Do what a node shall do.  明确一个节点要做的事
+- Recursive call a node's subtrees. 递归调用所有子树
+- The traversal way usually use with class property.
+
+###### Divide and conquer: The final result will get from its left subtree's and right subtree's result.
+
 - Recursive call the node's left and right tree. 递归调用左右子树
-- If we need to do something without changing the returning result(not include the class property), we can do it before the recursion. This is a top-down traversal.
-- Note: The top-down traversal is traversing from top to bottom(由上至下的正向思考方式). Most of the time, the recursion method has a void return type. We can not remember each recursion's result. If we need remember each recursive call's result, we can save them in the class property or in the input parameter(object). 如果我们需要记录每层递归的一些答案， 我们只能通过全局变量记录，或者通过更改函数input parameter's property来记录（如果 input parameter 是 object）
+- Use left and right subtree returning result to calculate final result.  
+- The divide and conquer way usually has a return type because it needs to use left and right subtree's result.
 
-###### Bottom-up Traversal (先分左右到底，再利用左右结果与node本身value做事)
-
-- Recursive call the node's left and right tree. 递归调用左右子树
-- Do what a node shall do with the left and right subtree returning result.  明确一个节点要做的事
-- If we don't know the initial value and we need to use the bottom's value to build the final result,  shall call the recursion to divide the tree to the bottom and use the recursion's result to build the final result level by level up to the top. This is the post-order traversal, i.e. bottom-up.
-- Note: The bottom-up is traversing from bottom to top（由下至上的逆向思考方式). Most of the time, the recursion method has a return type. After we call left and right sub tree recursion function, we suppose we get the result from both subtree and we need to use the returned result and node itself to calculate the final result.
-
-Most of the questions are combined with two ways. To build some parameters using top-down, some parameters using post-order.
+Most of the questions are combined with two ways. If we need to get some value through looking all nodes, we will use traversal. If we will get some value from left or right subtree's result, we will use divide and conquer.
 
 ### Problem
 
@@ -87,7 +85,7 @@ As the picture described, each method (including its instructions and parameters
 
 Because java can not save 2 types in one stack. We will create a customized object to bundle a tree node and marker(whether it is a value, or a node).
 
-![BinaryTreeRecursionStack](/asset/BinaryTreeRecursionStack.JPG)
+![](E:\study\jiuzhang\Notes\BinaryTreeRecursionStack.JPG)
 
 Since stack is popping in the reversed order of pushing. Here we need to save the nodes in reversed visited order, which means for preorder, we will push the nodes as right, left, and node itself. Right and left are pushed as subtree, node itself will be pushed as wait for visited.
 
@@ -182,11 +180,11 @@ Explanation：
 
 Analysis:
 
-Here we can use both top-down and post-order(bottom-up).
+Here we can use both traversal and divide-conquer.
 
-top-down: 
+Traversal: 
 
-Traverse all nodes and check whether the node is a leaf node. If it is true, add its value to the final sum result. The top-down method needs to use a class property to remember the final result. The top-down is easier to think, but has side effect.
+Check a node, if it is a leaf node, add its value to the final sum. The left subtree and right subtree do the same operation. The traversal method needs to use a class property to remember the final result, so it has a side effect.
 
 ```java
 public int sum;
@@ -211,9 +209,9 @@ private void traverse(TreeNode cur) {
 }
 ```
 
-Bottom-up (Post-order)： 
+Divide-conquer： 
 
-The binary tree's leaf sum equals the sum of its left sub tree's leaf sum and right sub tree's leaf sum. 
+The binary tree's leaf sum equals the sum of its left subtree's leaf sum and right subtree's leaf sum. 
 
 ```java
     public int leafSum(TreeNode root) {
@@ -273,9 +271,9 @@ Explanation：
 
 Analysis:
 
-top-down:
+Traversal:
 
-Traverse all nodes until the target level. If the node is in the target level, add its value to the final sum result.
+Check a node whether it is in the target level, if yes, we will add the node's value to the final sum result. Do the same operations for nodes on the left and right subtree.
 
 ```java
 int sum;
@@ -300,7 +298,7 @@ private void traverse(TreeNode cur, int level, int height) {
 }
 ```
 
-Bottom-up:
+Divide-conquer:
 
 以root为顶点的树到targeted level 的level sum = left-subtree's level sum +  right subtree's level sum.
 
@@ -354,15 +352,11 @@ Explanation：
 
 Analysis:
 
-top-down traversal: build the string during the traverse of the tree from top to down. Since the returning type is a `List<String>`, we can build the result through input parameter instead of using global variables.
+Traversal: A node will collect the path with its left child's value for left subtree, and the path with its right child's value for right subtree. Since the returning type is a `List<String>`, we can build the result through input parameter instead of using global variables.
 
 *[5. Modifying input parameters during a method call](CleanCodePractice.md)*
 
-Bottom-up: 
-
-Get all left subtree's paths, and all right subtree's paths. Add the cur value to all left subtree's paths, and right subtree's paths in the front of all paths iteratively. 
-
-Here we will only post the top-down traversal way since it is easier to think of.
+Here we will only post the traversal traversal way since it is easier to think of.
 
 ```java
     public List<String> binaryTreePaths(TreeNode root) {
@@ -395,6 +389,10 @@ Here we will only post the top-down traversal way since it is easier to think of
 
     }
 ```
+
+Divide-conquer: 
+
+Get all left subtree's paths, and all right subtree's paths. Add the cur value to all left subtree's paths, and right subtree's paths in the front of all paths iteratively. 
 
 ###### [469. Same Tree](https://www.lintcode.com/problem/same-tree/description)
 
@@ -435,11 +433,11 @@ are not identical.
 
 Analysis:
 
-Top-down:
+Traversal:
 
 Traverse all the nodes same time of tree a and tree b. Use a global variable to remember if they are the same or not.
 
-Bottom-up:
+Divide-conquer:
 
 If left subtree and right subtree are identical, and the cur value from a and b are the same, we can return true. Otherwise, return false.
 
@@ -494,7 +492,7 @@ Explanation:
 
 Analysis:
 
-Top-down: this question doesn't need a return type, so we will use top-down directly. We will swap left and right sub trees, and call recursions.  
+Traversal: this question doesn't need a return type, so we will use traversal directly. We will swap left and right sub trees, and call recursions.  
 
 Even though after the swap the traverse order of left and right will change, it won't influence the  final result. The question only requires invert all left and sub trees.
 
@@ -545,9 +543,9 @@ it will be serialized {1,2,3,#,#,4,5}
 
 Analysis:
 
-Bottom-up:
+Divide-conquer:
 
-This is a basic question. Since the method needs a return type, and the method doesn't need extra input parameters, we can  directly use the method signature with bottom-up. Each node's max depth is its max depth of its left subtree and right subtree + 1. 
+A tree's max depth is the max depth of its left subtree and right subtree + 1. 
 
 ```java
     public int maxDepth(TreeNode root) {
@@ -611,9 +609,9 @@ Example  3:
 
 Analysis:
 
-Since this question requires return value and the value type is a primary type. We will use bottom-up method to resolve this question.
+Since this question requires return value and the value type is a primary type. We will use divide-conquer method to resolve this question.
 
-Bottom-up:
+Divide-conquer:
 
 Left subtree is balanced, right subtree is balanced, and their heights' differences are not greater than 1, then we can say the tree is a balanced tree. Therefore, we need to return both heights and whether the current tree is a balanced tree. **If we need to return 2 different primary types for one method call, we can create an object and save those 2 return results into object's properties.**
 
@@ -689,6 +687,8 @@ The tree is look like this:
 For sum = 5 , it is obviously 1 + 2 + 2 = 1 + 4 = 5
 ```
 
+
+
 Example 2:
 
 ```plain
@@ -710,11 +710,11 @@ There is no one satisfying it.
 
 Analysis:
 
-Top-down:
+Traversal:
 
-Calculate sum and collect paths from root to all nodes during top-down traversal. When we reach to leaves and the sum is exactly target, we will collect this path to the final result. 
+Calculate sum and collect paths from root to all nodes during traversal traversal. When we reach to leaves and the sum is exactly target, we will collect this path to the final result. 
 
-This question includes a backtracking skill point. Before we call the next level recursion, we will modify some properties. After the recursion return to the current level, we need to recover those modified properties.
+This question includes a backtracking. Before we call the next level recursion, we will modify some properties. After the recursion return to the current level, we need to recover those modified properties.
 
 ```java
 public List<List<Integer>> binaryTreePathSum(TreeNode root, int target) {
@@ -755,7 +755,7 @@ public void traverse(TreeNode cur, int target, List<Integer> path, List<List<Int
 }
 ```
 
-Bottom-up:
+Divide-conquer:
 
 Find all paths in left subtree and right subtree their sum equals target - root's value. Collect all left and right subtree's result.
 
@@ -803,11 +803,11 @@ for target 10, there is no way to reach it.
 
 Analysis:
 
-This question requires returning  a list of all paths. We can use both top-down and bottom-up. However, bottom-up needs to consider the question from result to requirements. Also, top-down won't introduce extra global variables because the result is an object already. Therefore, we will use top-down traversal for this question.
+This question requires returning  a list of all paths. We can use both traversal and divide-conquer. However, divide-conquer needs to consider the question from result to requirements. Also, traversal won't introduce extra global variables because the result is an object already. Therefore, we will use traversal for this question.
 
-We will traverse top-down to build a path from root to leaf. For each node, we will iteratively calculate sum back up from each node to get sums not starting from root.
+We will build a path from root to leaf. For each node, we will iteratively calculate sum back up from each node to get sums not starting from root.
 
-This question is actually a typical DFS question. DFS is actually a top-down traversal for multiple-branch trees. In the requirements, we can see the question is looking for **all paths**. DFS is looping each element in the same level horizontally and call recursion for each node.  this question, horizontally, we only have 2 subtrees. We will enumerate them by left and right. Here we need to pay attention, this question's iteration is different from the DFS template iteration. 
+This question is actually a typical DFS question. DFS is actually a traversal for multiple-branch trees. In the requirements, we can see the question is looking for **all paths**. DFS is looping each element in the same level horizontally and call recursion for each node.  this question, horizontally, we only have 2 subtrees. We will enumerate them by left and right. Here we need to pay attention, this question's iteration is different from the DFS template iteration. 
 
 Time complexity is O(n^2).
 
@@ -946,7 +946,7 @@ Explanation:
 
 Analysis: 
 
-Bottom-up:
+Divide-conquer:
 
 We can get left subtree's max path sum and right subtree's max path sum. Compare the left subtree and right subtree. If the greater path sum is **> 0**, we will add the path sum to with the root value and return. Otherwise, we will return root value itself.
 
@@ -1003,7 +1003,7 @@ Notice:
 LintCode will print the subtree which root is your return node.
 It's guaranteed that there is only one subtree with minimum sum and the given binary tree is not an empty tree.
 
-Analysis: Get all sums for the all subtrees. Compare each sum and maintain a minimum for all trees.
+Analysis: Get sums for all subtrees. Compare each sum and maintain a minimum for all trees.
 
 ```java
 public class Solution {
@@ -1033,7 +1033,7 @@ public class Solution {
 }
 ```
 
-Bottom-up:
+Divide-conquer:
 
 minimum sum of a subtree is the minimum of (left, right, and left + right + root value).
 
@@ -1328,7 +1328,7 @@ The ancestor is the first node that diverse 2 nodes into left and right sub tree
 
 We shall compare from the root to the leaf to see weather any node equal the target node (A or B). If we find any target node, we shall return it. if a node's left subtree contains a node, right subtree contains another node, the node is the lowest common ancestor. If we find target A and B are in the same subtree, then the first node we find in the top-down direction is the lowest common ancestor. 
 
-This question is a variation of finding a node from binary search tree. Once we find a target, we will return that target directly from that node. If a node contains both targets on its left and right subtrees alone bottom-up returning direction, the node is the lowest common ancestor. We won't search the whole tree to the bottom, instead, we will return if we find any node A or B. If A or B is on the same side of tree, we need to find the topper one. Therefore, we have to return the first finding in the top-down direction, i.e., if we find a target, we shall return before we call the recursion.
+This question is a variation of finding a node from binary tree. Once we find a target, we will return that target directly from that node. If a node contains both targets on its left and right subtrees alone bottom-up returning direction, the node is the lowest common ancestor. We won't search the whole tree to the bottom, instead, we will return if we find any node A or B. If A or B is on the same side of tree, we need to find the topper one. Therefore, we have to return the first finding in the top-down direction, i.e., if we find a target, we shall return before we call the recursion.
 
 ```java
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode A, TreeNode B) {
@@ -1498,7 +1498,7 @@ Notice
 node A or node B may not exist in tree.
 Each node has a different value
 
-Analysis: This question is question [88. Lowest Common Ancestor of a Binary Tree](#88. Lowest Common Ancestor of a Binary Tree) + if we can find both nodes. Lowest Common Ancestor of a Binary Tree](#88. Lowest Common Ancestor of a Binary Tree) 's solution has been posted. Here we need to make sure whether we can find both nodes. We can use divide-conquer method. We need 2 Boolean values in the returning result to remember whether we found target A or B. If left subtree contains A, or right subtree contains A, or root == A, A exists in the tree. Same for the target B. After we can find both targets, [88. Lowest Common Ancestor of a Binary Tree](#88. Lowest Common Ancestor of a Binary Tree) 's returning is the answer. If any of them doesn't exist, we return null. The two recursion can be combined into one method. Besides we need to create a returning object, we need to pay attention the variables updating orders. Some variables has to be updated before recursion (top-down), some variables will update after recursion(bottom-up).
+Analysis: This question is question [88. Lowest Common Ancestor of a Binary Tree](#88. Lowest Common Ancestor of a Binary Tree) + if we can find both nodes. Lowest Common Ancestor of a Binary Tree](#88. Lowest Common Ancestor of a Binary Tree) 's solution has been posted. Here we need to make sure whether we can find both nodes in  bottom-up order. We need 2 `boolean` values in the returning result to remember whether we found target A or B. If left subtree contains A, or right subtree contains A, or root == A, A exists in the tree. Same for the target B. After we can find both targets, [88. Lowest Common Ancestor of a Binary Tree](#88. Lowest Common Ancestor of a Binary Tree) 's returning is the answer. If any of them doesn't exist, we return null. The two recursion can be combined into one method. Besides we need to create a returning object, we need to pay attention the variables updating orders. Some variables has to be updated before recursion, some variables will update after recursion.
 
 ```java
 public class Solution {
@@ -1564,87 +1564,3 @@ class ResultType {
 }
 ```
 
-###### [11. Search Range in Binary Search Tree](https://www.lintcode.com/problem/search-range-in-binary-search-tree/solution)
-
-Given a binary search tree and a range `[k1, k2]`, return node values within a given range in ascending order.
-
-Example 1:
-
-```
-Input：{5},6,10
-Output：[]
-        5
-it will be serialized {5}
-No number between 6 and 10
-```
-
-Example 2:
-
-```
-Input：{20,8,22,4,12},10,22
-Output：[12,20,22]
-Explanation：
-        20
-       /  \
-      8   22
-     / \
-    4   12
-it will be serialized {20,8,22,4,12}
-[12,20,22] between 10 and 22
-```
-
-Analysis:
-
-This question is in-order traverse + only collect the numbers in the range from k1 to k2.
-
-```java
-public List<Integer> searchRange(TreeNode root, int k1, int k2) {
-
-    List<Integer> result = new ArrayList<>();
-    traverse(root, k1, k2, result);
-    return result;
-
-}
-
-private void traverse(TreeNode cur, int k1, int k2, List<Integer> result) {
-
-    if(cur == null) {
-        return;
-    }
-
-    traverse(cur.left, k1, k2, result);
-
-    if(cur.val >= k1 && cur.val <= k2) {
-        result.add(cur.val);
-    }
-
-    traverse(cur.right, k1, k2, result);
-
-}
-```
-
-### Summery
-
-###### Save the variable as input parameters' property, as class property, or returned result's property?
-
-Variables can be saved into different ways, and sometimes, different ways can switch in between. Here I will summarize some general rules with example.
-
-- **The variable's value, which can be calculated from top to bottom, is easier to save as input parameters. That is to say, root's value doesn't depend on neither right or left subtree's value.** Top-down is usually easier than bottom-up because top-down is reasoning from requirements to result. If the variable can be calculated by both top-down and bottom-up, we will choose top-down first.
-
-  - **One of the most commonly usage is DFS. If the problem requires *all* solutions, you need to consider use DFS search, and its parameters are all input parameters**
-  - The root's initial value is known. Eg., in question  [106. Convert Sorted List to Binary Search Tree](#106. Convert Sorted List to Binary Search Tree) , the variable length. The root's length is known, and other children's values can be calculated in top-down directions.
-  - The root's initial value is unknown. Usually, the variable is a property of left and right sub tree. Even roots is unknown, it doesn't matter. All other children's value can be calculated in top-down directions. Eg., in question  [95. Validate Binary Search Tree](# 95. Validate Binary Search Tree) the variable min and max. We can calculate the min and max range before recursion.
-
-- **The variable's value, which can be calculated from bottom to top and its initial value is not an input parameter, but a constant, shall be saved in returned result's property. That is root's value depends on left and right subtree's value** If the variable at root's value is unknown, and it is hard to calculate its left and right child's value top-down neither. We will use bottom-up way. 
-
-  - Eg., in question [93. Balanced Binary Tree](#93. Balanced Binary Tree), we don't know root's depth at the beginning, and we can not reasoning its left and right sub tree's depth either. Here it is better to save the depth in the returned result property.
-
-- **Saving as class property variable is the most powerful one. It can be used with preorder, in-order and post-order traverse. Unlikely saving in the returning type (post-order) which can only be returned level by level, or saving in the input parameter (top-down) which can only be built level by level, it can be calculated in any level and in any direction (top-down or bottom up).  However, it has side effects, it is better to be avoid.**
-
-  - **One of the class variable usage is, the variable can only be calculated from bottom to top and its initial value is not constant(which will get from method inputs) .**
-
-  - **Another character that might imply to use class variable is root's value only depends on left subtree, but not right subtree**
-
-    Since the variable is an input parameter, it has to be passed as an input parameter. However, it can only get updated in bottom-down direction, we have to save the updated variable's value in the returned result. 
-
-    Eg., in question  [106. Convert Sorted List to Binary Search Tree](#106. Convert Sorted List to Binary Search Tree) , the variable linked list head. It is a method input parameter, and it can only be updated bottom-up. So we can save the variable both as input parameter and returned result property. Or we can save it as a class property.
