@@ -6,6 +6,7 @@ categories: Binary Tree
 ---
 Binary Tree is a data structure extended from linked list data structure. It has the character of inconsecutive data storage , and indirect data access(unlike array's direct access). **It suits to traverse by recursion**. 
 
+
 ### Basic Knowledge
 
 There are 3 ways of traversal. Most of the issues can be resolved using the 3 ways of traversal. 
@@ -53,8 +54,6 @@ We can resolve a binary tree problem using traversal way or divide and conquer w
 - Recursive call the node's left and right tree. 递归调用左右子树
 - Use left and right subtree returning result to calculate final result.  
 - The divide and conquer way usually has a return type because it needs to use left and right subtree's result.
-
-Most of the questions are combined with two ways. If we need to get some value through looking all nodes, we will use traversal. If we will get some value from left or right subtree's result, we will use divide and conquer.
 
 ### Problem
 
@@ -1236,7 +1235,7 @@ Longest consecutive sequence path is 2-3,not 3-2-1, so return 2.
 
 Analysis:
 
-If the root is not consecutive with neither right or left child, the length for that node will be 1. If the root is consecutive with one of them or is consecutive with both children, root length will the longer one. We will use a global variable to save the longest length for all nodes.
+A node's max consecutive length is the max of left subtree's consecutive length and right subtree's consecutive length + 1 or 1. We need to traverse all nodes to get the longest length.  
 
  
 
@@ -1563,4 +1562,84 @@ class ResultType {
     }
 }
 ```
+
+###### [1360. Symmetric Tree](https://www.lintcode.com/problem/symmetric-tree/description)
+
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+Example1
+
+```
+Input: {1,2,2,3,4,4,3}
+Output: true
+Explanation:
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+This binary tree {1,2,2,3,4,4,3} is symmetric
+```
+
+Example2
+
+```
+Input: {1,2,2,#,3,#,3}
+Output: false
+Explanation:
+    1
+   / \
+  2   2
+   \   \
+   3    3
+This is not a symmetric tree
+```
+
+Analysis:
+
+If left and right subtree's value are equal, a left.right subtree and right.left subtree are symmetrical, and a left.left and right.right are symmetrical, the tree is symmetrical. The reuqirment doesn't need any info from root, but only left and right subtree. We will pass node 1 and node2 as parameter.
+
+```java
+public boolean isSymmetric(TreeNode root) {
+  if(root == null) {
+    return true;
+  }
+
+  return helper(root.left, root.right);
+
+}
+
+
+private boolean helper(TreeNode node1, TreeNode node2) {
+
+  if(node1 == null && node2 == null) {
+    return true;
+  }
+
+  if(node1 == null && node2 != null || node1 != null && node2 == null) {
+    return false;
+  }
+
+  if(node1.val != node2.val) {
+    return false;
+  }
+
+  boolean isLeft = helper(node1.right, node2.left); 
+  boolean isRight = helper(node1.left, node2.right);
+
+  return isLeft && isRight;
+}
+```
+
+
+
+### Summery: 
+
+- If an operation's requirement doesn't need any left or right subtree's info but only use root's info, we can use **traversal** directly. 
+  - [481. Binary Tree Leaf Sum](# 481. Binary Tree Leaf Sum): We only need to check whether a node is a leaf and calculate the sum. The calculation doesn't need any info from left or right subtree.
+- If an operation's requirement need all nodes info from left or right subtree, even though, we need all nodes on left or right subtree, we still need to run operation on all nodes. We still can use **traversal**.
+  - [95. Validate Binary Search Tree](https://www.lintcode.com/problem/validate-binary-search-tree/description): One of the requirements is all nodes on left subtree must be less than the root and right subtree must be greater than root. Here we need to check whether each node is in a range using traversal.
+- If an operation's requirment need left or right subtree's result, and result usually contains countable properties( most of them is 1) not a list, we will use **divide-conquer**.
+  - [97. Maximum Depth of Binary Tree](#97. Maximum Depth of Binary Tree): Maximum depth is max of left subtree's maximum depth and right subtree's maximum depth + 1. Here we need to use left subtree's result, and right subtree's result. We will use divide-conquer.
+- If an operration's requirment only need left or right subtree info but not root's info, we shall **pass 2 nodes into the method** and find rules with left and right subtree's children. It can use **traversal or divide-conquer**
 
