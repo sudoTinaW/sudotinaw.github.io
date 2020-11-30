@@ -1,8 +1,4 @@
-## Sliding Window
-
-### Basic Knowledge: 
-
-Sliding Window often applies on finding consecutive elements .When we need to find subarray or substring, we shall try sliding window technique first. Its has 2 difficulties, one is how to prove a question can use this technique. The other is how to implement it.
+Sliding Window often applies on finding consecutive elements. When we need to find subarray or substring, we shall try sliding window technique first. Its has 2 difficulties, one is how to prove a question can use this technique. The other is how to implement it.
 
 - How to prove a question can use sliding window technique:
   Sliding window is actually a greedy algorithm. To proof the current best choice can make the final best choice is the key thought of deciding whether we can use this technique for a question. Here we will offer the detailed proof, and offer a conclusion to help you quickly decide whether we can use this algorithm to solve the problem.
