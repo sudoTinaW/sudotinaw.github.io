@@ -1,5 +1,8 @@
 ---
 published: true
+layout: post
+date: '2020-10-20 14:50:00 -0000'
+categories: BFS
 ---
 Comparing to DFS, BFS is usually used to find shortest path. Since it is using while loop, the debug is easier, and has lower risk of stackoverflow.
 
