@@ -33,19 +33,19 @@ Sliding Window often applies on finding consecutive elements .When we need to fi
 
     if the window has reached to the fixed size, the left pointer can only go one forward to maintain the window size, which is not possible to move backwards either.
 
-How to implement:
+- How to implement:
 
-We have a template as following,
+  We have a template as following,
 
-- Right and left pointer in this template will both stop at the final result + 1 position. For the right pointer, since substring function requires[ ) boundary, the final result + 1 is what we need. For the left pointer, if we we need to collect its result inside while loop we need to collect it before the left pointer is updated.
+  - Right and left pointer in this template will both stop at the final result + 1 position. For the right pointer, since substring function requires[ ) boundary, the final result + 1 is what we need. For the left pointer, if we we need to collect its result inside while loop we need to collect it before the left pointer is updated.
 
-- If the left pointer can only move one step forward at most for every new right pointer, which is a fixed size window situation, we can change the inner `while` loop to `if `condition.
+  - If the left pointer can only move one step forward at most for every new right pointer, which is a fixed size window situation, we can change the inner `while` loop to `if `condition.
 
-- The left pointer moves when a window **qualifies** the question's requirement to get the **min/ fixed** window. Therefore, the inner loop condition shall be when window qualifies the question's requirement.
+  - The left pointer moves when a window **qualifies** the question's requirement to get the **min/ fixed** window. Therefore, the inner loop condition shall be when window qualifies the question's requirement.
 
-- The left pointer moves when a window **disqualifies** the question's requirement to get the **max** window, the inner loop condition shall be when window disqualifies the question's requirement. Therefore, the inner loop condition shall be when window disqualifies the question's requirement.
+  - The left pointer moves when a window **disqualifies** the question's requirement to get the **max** window, the inner loop condition shall be when window disqualifies the question's requirement. Therefore, the inner loop condition shall be when window disqualifies the question's requirement.
 
-- The result will always be updated when the window qualifies the question's requirement. When the left pointer moves when a window qualifies the question's requirement, the result will be updated inside the left pointer's move condition. When the left pointer moves when a window disqualifies the question's requirement, the result will be updated outside the left pointer's while loop whenever a right pointer moves and left and updates to a new valid window.
+  - The result will always be updated when the window qualifies the question's requirement. When the left pointer moves when a window qualifies the question's requirement, the result will be updated inside the left pointer's move condition. When the left pointer moves when a window disqualifies the question's requirement, the result will be updated outside the left pointer's while loop whenever a right pointer moves and left and updates to a new valid window.
       
 
   ```java
