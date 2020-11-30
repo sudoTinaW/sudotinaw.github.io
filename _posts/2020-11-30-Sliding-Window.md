@@ -1,13 +1,9 @@
 ---
-published: false
+published: true
 layout: post
 date: '2020-10-20 14:50:00 -0000'
 categories: Sliding Window
 ---
-## Sliding Window
-
-### Basic Knowledge: 
-
 Sliding Window often applies on finding consecutive elements .When we need to find subarray or substring, we shall try sliding window technique first. Its has 2 difficulties, one is how to prove a question can use this technique. The other is how to implement it.
 
 - How to prove a question can use sliding window technique:
@@ -573,5 +569,3 @@ public int lengthOfLongestSubstringKDistinct(String s, int k) {
     return result;
 }
 ```
-
-
