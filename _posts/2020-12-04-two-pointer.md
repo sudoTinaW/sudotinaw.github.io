@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 layout: post
 date: '2020-12-04 14:50:00 -0000'
 categories: two-pointer
@@ -1287,5 +1287,3 @@ public int[] sortedSquares(int[] A) {
 
 }
 ```
-
-
