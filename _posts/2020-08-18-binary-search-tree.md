@@ -6,7 +6,6 @@ categories: Binary Search Tree
 ---
 Binary Search Tree is one of the commonly used binary tree. Its definition is all nodes on the left subtree are <= the node, and all nodes on the right subtree are >= the node.
 
-
 The blog is written based on [labuladong](https://labuladong.gitbook.io/algo/shu-ju-jie-gou-xi-lie/er-cha-sou-suo-shu-cao-zuo-ji-jin) git book.
 
 ### Basic Knowledge
