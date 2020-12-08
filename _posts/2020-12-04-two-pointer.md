@@ -4,7 +4,7 @@ layout: post
 date: '2020-12-04 14:50:00 -0000'
 categories: two-pointer
 ---
-Two-pointer technique is commonly used to solve array, string and linked list problem. It often solves the problem in place. We have classified the two-pointer questions by its templates. The two pointer questions includes *[sliding window](./SlidingWindow.md)*,  *[partition(merge sort, quick sort)](./Sort.md)*,  *[binary search](./BinarySearch.md)*, [*fast and slow pointer*](#Fast and Slow Pointer (Hare & Tortoise)), and [*left and right pointer*](Left and Right Pointer) problems. In this article, we will only describe  [*fast and slow pointer*](#Fast and Slow Pointer (Hare & Tortoise)), and [*left and right pointer*](Left and Right Pointer) .
+Two-pointer technique is commonly used to solve array, string and linked list problem. It often solves the problem in place. We have classified the two-pointer questions by its templates. The two pointer questions include *[sliding window](./SlidingWindow.md)*,  *[partition(merge sort, quick sort)](./Sort.md)*,  *[binary search](./BinarySearch.md)*, [*fast and slow pointer*](#Fast and Slow Pointer (Hare & Tortoise)), and [*left and right pointer*](Left and Right Pointer) problems. In this article, we will only describe  [*fast and slow pointer*](#Fast and Slow Pointer (Hare & Tortoise)), and [*left and right pointer*](Left and Right Pointer) .
 
 *The main thought in this article is originated from [labuladong](https://labuladong.gitbook.io/algo/suan-fa-si-wei-xi-lie/shuang-zhi-zhen-ji-qiao), and [jiuzhang](https://www.jiuzhang.com/course/)*
 
